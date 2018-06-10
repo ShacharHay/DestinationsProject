@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ApplicationsProject.Models.Destination>
+
+@{
+    ViewBag.Title = "Search";
+}
+@*@using Destinations.Models
+@model IEnumerable<Destinations.Models.Destination>*@
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+@using (Html.BeginForm("Search", "Destinations", FormMethod.Get))
+{
+    <aside style="margin: 20px 0">Enter up to 3 search parameters and click the "Search" button below</aside>
+
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div class="col-md-2">
+                    Title:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="title" />
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-2">
+                    Content:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="content" />
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-2">
+                    Date:
+                </div>
+                <div class="col-md-10">
+                    <input type="date" name="date" />
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" style="position: absolute; top: 20px" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <hr />
+}
+@foreach (var destination in Model)
+{
+    <section>
+        <article class="blogPost">
+            <h4 style="color: green">
+                @Html.DisplayFor(modelItem => destination.Title)
+            </h4>
+            <p>Posted on @Html.DisplayFor(modelItem => destination.CreationDate) by <a href="#">@Html.DisplayFor(modelItem => destination.Client.ClientName)</a> - <a href="#comments">@destination.Comments.Count Comments</a> in @Html.DisplayFor(modelItem => destination.Continent.Name) category</p>
+            <div style="column-count: 3; column-gap:40px; column-rule: 1px solid lightgrey">
+                @Html.DisplayFor(modelItem => destination.Content)
+            </div>
+        </article>
+    </section>
+    <br />
+    <section id="comments">
+        <h5>Comments</h5>
+        @foreach (var comment in destination.Comments)
+        {
+            <article>
+                <header>
+                    <span>By @comment.Client.ClientName</span> at @comment.CreationDate
+                </header>
+                @comment.Content
+            </article>
+        }
+    </section>
+    <hr />
+}

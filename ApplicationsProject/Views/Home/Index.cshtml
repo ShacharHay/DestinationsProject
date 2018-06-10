@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div style="position: relative; align-content:center">
+    <canvas id="canvas" width="1000" height="350"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var imageObj = new Image();
+
+        imageObj.onload = function () {
+            context.drawImage(imageObj, 0, 0);
+        };
+
+        imageObj.src = '../../picture.jpg';
+    </script>
+    <div style="position:absolute; top: 30px; left: 380px">
+        <h1 style="color: black; text-shadow: indigo 1px; vertical-align: bottom">
+            Destinations
+        </h1>
+        <h4 style="color: black; vertical-align: bottom">
+            This is our blog
+        </h4>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-6" style="padding-right: 40px;">
+
+        <h2>This is the name</h2>
+        <br />
+        <p>
+            information  information  information  information  information  information
+            information  information  information  information  information  information
+
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Visit our country :)</h2>
+        <video width="350" height="290" controls>
+            <source src="~/Content/telavivjerusalm.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+
+
+@*@{
+        ViewBag.Title = "Home Page";
+    }
+
+
+
+    <div class="container">
+        <img src="~/Content/picture.jpg" alt="Norway" width="950" height="350">
+
+
+    </div>
+
+
+
+
+    <p class="lead">Here- Information about our blog</p>*@
