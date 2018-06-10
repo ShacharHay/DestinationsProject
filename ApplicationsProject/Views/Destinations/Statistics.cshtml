@@ -1,0 +1,107 @@
+﻿<h2 class="page-title" style="margin-top: 30px">@ViewBag.Title</h2>
+@model IEnumerable<ApplicationsProject.ViewModels.DestinationComment>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var destinationComments = Model;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfComment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorFullName)
+        </th>
+    </tr>
+    @{
+        foreach (var destination in destinationComments)
+        {
+            <tr>
+                <td>
+                    @destination.Title
+                </td>
+                <td>
+                    @destination.NumberOfComment
+                </td>
+                <td>
+                    @destination.AuthorFullName
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<style>
+
+    .bar {
+        fill: green;
+        transition: fill 3s;
+    }
+
+        .bar:hover {
+            fill: brown;
+        }
+
+    .axis {
+        font: 10px sans-serif;
+    }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+</style>
+<hr />
+<section id="popular-destinations-graph">
+    <h4>Most popular recipes</h4>
+    <p>Show the most popular recipes according to the number of comments they got</p>
+</section>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="~/Scripts/graph.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+
+    //add the 2 up line and change the code under , in statsjson change to resultjson
+
+    $.ajax({
+        url: "/Destinations/StatsJson",
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+
+            var usersData = result;
+            
+          createPopularDestinationsGraph(usersData);
+            
+            //alert("success"); // cheking if we enter to the ajax
+        },
+        error: function (result) {
+            alert("error");
+        }
+    });
+
+    //not work
+    @*$.ajax({
+        url: '@Url.Action("StatsJson", "Destinations")',
+        type: 'GET',
+        success: function (query2) {
+            var usersData = query2;
+
+            createPopularDestinationsGraph(usersData);
+        },
+
+    });*@
+
+</script>
+
+
+

@@ -1,0 +1,80 @@
+﻿@{ 
+    ApplicationsProject.Models.Client clnt = (ApplicationsProject.Models.Client)Session["Client"];
+}
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - ApplicationsProject</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" style="background-color: #4ddbff;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Destinations", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Destinations", "Index", "Destinations")</li>
+                        <li>@Html.ActionLink("Destination Statistics", "Statistics", "Destinations")</li>
+                        <li>@Html.ActionLink("Clients Statistics", "Statistics", "Clients")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                        @if (clnt != null && clnt.IsAdmin)
+                        {
+                            <li>@Html.ActionLink("Continents", "Index", "Continents")</li>
+                            <li>@Html.ActionLink("Users", "Index", "Clients")</li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginLayout")
+                </div>
+                @*@Html.Partial("_LoginLayout")*@
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <center>
+
+              
+
+
+                    @*<div id="temperatureDiv">
+                        <br /><hr />
+                        <h4>Weather in Israel</h4>
+                        <p>getting info...</p>
+                    </div>
+                            </center >
+                            < !--Weather webservice-- >
+                        <script src="~/Scripts/weather.js"></script>
+
+                <script src="https://query.yahooapis.com/v1/public/yql?q=select item, wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='Rishon LeZion, il') and u='c'&format=
+                &callback=weatherCallback"></script>*@
+
+                <a class="weatherwidget-io" href="https://forecast7.com/en/31d0534d85/israel/" data-label_1="ISRAEL" data-label_2="WEATHER" data-theme="pure">ISRAEL WEATHER</a>
+                <script>
+                    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) {js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+                </script>
+
+                <hr />
+                <footer>
+                    <center>
+                        <p>&copy; @DateTime.Now.Year - EST - Destinations </p>
+                    </center>
+                </footer>
+</div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>

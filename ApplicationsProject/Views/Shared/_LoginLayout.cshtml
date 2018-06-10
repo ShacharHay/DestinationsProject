@@ -1,0 +1,28 @@
+﻿@{
+    ApplicationsProject.Models.Client clnt = ((ApplicationsProject.Models.Client)Session["Client"]);
+}
+@*<ul class="navbar-nav bd-navbar-nav flex-row navbar-right">*@
+@*<ul class="navbar navbar-default navbar-fixed-top navbar-right" style="background-color: #4ddbff;">*@
+<ul class="nav navbar-nav navbar-right">
+    @if (clnt == null)
+    {
+        <li>
+            @Html.ActionLink("Register", "Create", "Clients")
+        </li>
+        <li>
+            @Html.ActionLink("Login", "DestinationsLogin", "Clients")
+        </li>
+    }
+    else
+    {
+        <li>
+            <a style="color: white !important; font-size: 18px; pointer-events: none;" href="#">
+                Welcome @(clnt.FirstName + " " + clnt.LastName)
+            </a>
+        </li>
+        <li>
+            @Html.ActionLink("Log Out", "Logout", "Clients")
+        </li>
+    }
+</ul>
+

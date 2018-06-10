@@ -1,0 +1,37 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDbK3-PKcz9w3uDXkR49HxkIYy5I-2tR8k"
+        type="text/javascript"></script>
+@{
+    ViewBag.Title = "Contact Us";
+}
+<center>
+    <h6 style="margin: 20px 0">@ViewBag.Title</h6>
+    <address>
+        Our office is at Azrieli, Tel-Aviv
+    </address>
+    <address>
+        <strong>Owners: </strong> <br />
+        <a href="mailto:SagiDahan123@gmail.com">SagiDahan123@gmail.com</a><br />
+        <a href="mailto:Shachar34Hay@gmail.com">Shachar34Hay@gmail.com</a><br />
+        <a href="mailto:MorAtias@gmail.com">MorAtias@gmail.com</a><br />
+    </address>
+
+    <div id="map" style="width: 500px; height: 400px;"></div>
+</center>
+<script type="text/javascript">function initMap() {
+    var myLatLng = { lat: 32.073809, lng: 34.792099 };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!'
+        });
+
+        marker.setMap(map);
+    }
+
+    initMap();</script>
